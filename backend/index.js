@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./models'); // Sequelize models (index.js inside models folder)
+const db = require('./models');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Test route
+
 app.get('/', (req, res) => {
   res.send('Backend is running');
 });
 
-// Get vehicle types (filtered by wheels if provided)
+
 app.get('/vehicle-types', async (req, res) => {
   try {
     const { wheels } = req.query;
@@ -25,7 +25,7 @@ app.get('/vehicle-types', async (req, res) => {
   }
 });
 
-// Get vehicles by typeId
+
 app.get('/vehicles', async (req, res) => {
   try {
     const { typeId } = req.query;
@@ -39,7 +39,7 @@ app.get('/vehicles', async (req, res) => {
   }
 });
 
-// Create booking with overlap check
+
 app.post('/bookings', async (req, res) => {
   try {
     const { firstName, lastName, vehicleId, startDate, endDate } = req.body;
@@ -48,11 +48,11 @@ app.post('/bookings', async (req, res) => {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    // Convert to Date objects
+   
     const start = new Date(startDate);
     const end = new Date(endDate);
 
-    // Check overlapping bookings
+    
     const overlap = await db.Booking.findOne({
       where: {
         vehicleId,
@@ -65,7 +65,7 @@ app.post('/bookings', async (req, res) => {
       return res.status(400).json({ error: 'Vehicle already booked for selected dates' });
     }
 
-    // Create booking
+   
     const booking = await db.Booking.create({
       firstName,
       lastName,
@@ -81,12 +81,12 @@ app.post('/bookings', async (req, res) => {
   }
 });
 
-// Start server
+
 const PORT = 3001;
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
 
-  // Test DB connection
+
   try {
     await db.sequelize.authenticate();
     console.log('Database connected successfully');

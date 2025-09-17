@@ -1,15 +1,15 @@
-/* Full viewport body */
+
 body {
-  height: 100vh;               /* full viewport height */
-  margin: 0;                    /* remove default margin */
-  display: flex;                /* enable flexbox */
-  justify-content: center;      /* center horizontally */
-  align-items: center;          /* center vertically */
-  background-color: #f0f0f0;    /* background color */
+  height: 100vh;             
+  margin: 0;                    
+  display: flex;                
+  justify-content: center;      
+  align-items: center;         
+  background-color: #f0f0f0;    
   font-family: 'Roboto', sans-serif;
 }
 
-/* Form container */
+
 .form-container {
   width: 90%;
   max-width: 800px;
@@ -17,7 +17,7 @@ body {
   padding: 20px;
 }
 
-/* Form title and subtitle */
+
 .form-title {
   font-size: 2rem;
   margin-bottom: 10px;
@@ -29,7 +29,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* Multi-step card styling */
 .multi-step-card {
   width: 100%;
   padding: 40px 30px;
@@ -43,12 +42,10 @@ body {
   box-sizing: border-box;
 }
 
-/* Stepper spacing */
 .multi-step-stepper {
   margin-bottom: 30px;
 }
 
-/* Step content area */
 .multi-step-content {
   display: flex;
   flex-direction: column;
@@ -56,14 +53,12 @@ body {
   margin-bottom: 20px;
 }
 
-/* Name fields flex layout */
 .name-fields {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-/* Buttons container */
 .multi-step-buttons {
   display: flex;
   justify-content: space-between;
@@ -71,26 +66,22 @@ body {
   margin-top: 10px;
 }
 
-/* Radio group spacing */
 .radio-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Date pickers layout */
 .date-picker-group {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-/* Input fields width on mobile */
 .multi-step-content input {
   flex: 1;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .multi-step-card {
     padding: 30px 20px;
