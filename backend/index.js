@@ -7,11 +7,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.get('/', (req, res) => {
   res.send('Backend is running');
 });
-
 
 app.get('/vehicle-types', async (req, res) => {
   try {
@@ -24,7 +22,6 @@ app.get('/vehicle-types', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch vehicle types' });
   }
 });
-
 
 app.get('/vehicles', async (req, res) => {
   try {
@@ -39,7 +36,6 @@ app.get('/vehicles', async (req, res) => {
   }
 });
 
-
 app.post('/bookings', async (req, res) => {
   try {
     const { firstName, lastName, vehicleId, startDate, endDate } = req.body;
@@ -48,7 +44,6 @@ app.post('/bookings', async (req, res) => {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-   
     const start = new Date(startDate);
     const end = new Date(endDate);
 
@@ -65,11 +60,17 @@ app.post('/bookings', async (req, res) => {
       return res.status(400).json({ error: 'Vehicle already booked for selected dates' });
     }
 
-   
+    
+    const vehicle = await db.Vehicle.findByPk(vehicleId);
+    if (!vehicle) {
+      return res.status(404).json({ error: 'Vehicle not found' });
+    }
+
     const booking = await db.Booking.create({
       firstName,
       lastName,
       vehicleId,
+      vehicleName: vehicle.name, 
       startDate: start,
       endDate: end,
     });
@@ -85,7 +86,6 @@ app.post('/bookings', async (req, res) => {
 const PORT = 3001;
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
-
 
   try {
     await db.sequelize.authenticate();
